@@ -1,8 +1,29 @@
-<h1>hello world</h1>
 
-<p>The local date and time is {{ moment(current_time).format('LLL') }}.</p>
-<p>That was {{ moment(current_time).fromNow(refresh=True) }}</p>
+{#    ###############   moment  不能使用，找不到原因，明天再找  ####################################}
+{#<h1>hello world</h1>#}
+{##}
+{#<p>The local date and time is {{ moment(current_time).format('LLL') }}.</p>#}
+{#<p>That was {{ moment(current_time).fromNow(refresh=True) }}</p>#}
+{##}
+{##}
+{#<p>当前时间：{{moment(current_time).format('YYYY年M月D日, h:mm:ss a')}}</p>#}
+{#<p>初始化访问时间:{{moment(current_time).fromNow(refresh=True)}}</p>#}
 
 
-<p>当前时间：{{moment(current_time).format('YYYY年M月D日, h:mm:ss a')}}</p>
-<p>初始化访问时间:{{moment(current_time).fromNow(refresh=True)}}</p>
+
+
+{% extends "base.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
+</div>
+
+
+{{ wtf.quick_form(form) }}
+
+{% endblock %}

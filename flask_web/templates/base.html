@@ -6,6 +6,23 @@
 {% block title %} Flasky {% endblock %}
 
 
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename = 'favicon.ico') }}" type="image/x-icon">
+<script src="{{ url_for('static',filename='jquery-3.3.1.js') }}"></script>
+<!--// 主要的脚本-->
+{#<script src="https://cdn.bootcss.com/moment.js/2.19.4/moment.min.js"></script>#}
+<!-- 格林时间（根据时间与地区来确定当前地区的时间） -->
+{#<script src="https://cdn.bootcss.com/moment.js/2.19.4/moment-with-locales.js"></script>#}
+    <!--引入Moment依赖库-->
+    {{moment.include_jquery()}}
+    {{moment.include_moment()}}
+    <!-- 简体中文(中国)zh-cn  -->
+    {{moment.lang('zh-CN')}}
+{% endblock %}
+
+
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
     <div class="container">
@@ -31,29 +48,21 @@
 
 
 {% block content %}
-    <div class="container">
-        {% block page_content %}{% endblock %}
+<div class="container">
+
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
     </div>
+    {% endfor %}
+
+    {% block page_content %}{% endblock %}
+
+</div>
 {% endblock %}
 
 
-
-
-{% block head %}
-{{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename = 'favicon.ico') }}" type="image/x-icon">
-<script src="{{ url_for('static',filename='jquery-3.3.1.js') }}"></script>
-<!--// 主要的脚本-->
-{#<script src="https://cdn.bootcss.com/moment.js/2.19.4/moment.min.js"></script>#}
-<!-- 格林时间（根据时间与地区来确定当前地区的时间） -->
-{#<script src="https://cdn.bootcss.com/moment.js/2.19.4/moment-with-locales.js"></script>#}
-    <!--引入Moment依赖库-->
-    {{moment.include_jquery()}}
-    {{moment.include_moment()}}
-    <!-- 简体中文(中国)zh-cn  -->
-    {{moment.lang('zh-CN')}}
-{% endblock %}
 
 
 
